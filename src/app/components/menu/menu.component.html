@@ -1,3 +1,5 @@
-<p>
-  menu works!
-</p>
+<ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngFor="let menuItem of menuItems">
+  <li class="nav-item">
+      <a class="nav-link" href="{{ menuItem.url }}">{{ menuItem.name }}</a>
+  </li>
+</ul>

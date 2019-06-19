@@ -7,11 +7,13 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
