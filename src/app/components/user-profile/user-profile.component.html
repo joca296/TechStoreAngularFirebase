@@ -1,0 +1,25 @@
+<form class="form-inline" *ngIf="auth.user | async; then authenticated else guest">
+  <!-- template will replace this form -->
+</form>
+
+<!-- User NOT logged in -->
+<ng-template #guest>
+  <button (click)="auth.googleSignin()" class="btn btn-primary">
+    <i class="fa fa-google"></i> Connect with Google
+  </button>
+</ng-template>
+
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  <div *ngIf="auth.user | async as user" class="dropdown">
+    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <label class="navbar-text mr-2" style="margin-bottom: 0px;">{{ user.displayName }}</label>
+      <img src="{{ user.photoURL }}" class="rounded-circle mr-2" style="height: 40px">
+    </a>
+
+    <div class="dropdown-menu">
+        <a href="#" (click)="auth.signOut()" class="dropdown-item">Logout</a>
+    </div>
+  </div>
+</ng-template>
