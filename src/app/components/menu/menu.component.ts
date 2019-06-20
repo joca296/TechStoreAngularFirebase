@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from 'src/app/services/menu.service';
-import { MenuItem } from 'src/app/models/MenuItem';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -8,19 +8,12 @@ import { MenuItem } from 'src/app/models/MenuItem';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  menuItems:MenuItem[] = new Array();
+  menuItems:Observable<any[]>;
 
   constructor(private menuService:MenuService) {}
 
   ngOnInit() {
-    this.menuService.getMenuItems().subscribe(results => {
-      results.forEach(result => {
-        this.menuItems.push({
-          name: result.data().name,
-          url: result.data().url
-        });
-      });
-    });
+    this.menuItems = this.menuService.getMenuItems();
   }
 
 }

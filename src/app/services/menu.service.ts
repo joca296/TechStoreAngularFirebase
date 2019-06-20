@@ -8,7 +8,7 @@ export class MenuService {
 
   constructor(private firestore:AngularFirestore) { }
 
-  getMenuItems(){
-    return this.firestore.collection("menu").get();
+  getMenuItems() {
+    return this.firestore.collection("menu").valueChanges();
   }
 }
