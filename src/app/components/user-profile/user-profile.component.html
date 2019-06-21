@@ -1,4 +1,4 @@
-<form class="form-inline" *ngIf="auth.user | async; then authenticated else guest">
+<form class="form-inline" *ngIf="auth.loggedInUser | async; then authenticated else guest">
   <!-- template will replace this form -->
 </form>
 
@@ -12,7 +12,7 @@
 
 <!-- User logged in -->
 <ng-template #authenticated>
-  <div *ngIf="auth.user | async as user" class="dropdown">
+  <div *ngIf="auth.loggedInUser | async as user" class="dropdown">
     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <label class="navbar-text mr-2" style="margin-bottom: 0px;">{{ user.displayName }}</label>
       <img src="{{ user.photoURL }}" class="rounded-circle mr-2" style="height: 40px">

@@ -7,22 +7,17 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 
 import { AppComponent } from './app.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-
 import { Router, RouterModule } from '@angular/router';
+import { NavbarModule } from './modules/navbar/navbar.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MenuComponent,
-    NavbarComponent,
-    UserProfileComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    NavbarModule,
     RouterModule.forRoot([]),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
