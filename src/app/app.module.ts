@@ -9,11 +9,16 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AppComponent } from './app.component';
 import { Router, RouterModule } from '@angular/router';
 import { NavbarModule } from './modules/navbar/navbar.module';
+import { AppRoutingModule } from './app-routing.module';
+import { CreateProductComponent } from './components/create-product/create-product.component';
+import { GetProductsComponent } from './components/get-products/get-products.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreateProductComponent,
+    GetProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +26,8 @@ import { NavbarModule } from './modules/navbar/navbar.module';
     RouterModule.forRoot([]),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
