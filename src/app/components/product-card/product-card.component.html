@@ -1,3 +1,20 @@
-<p>
-  product-card works!
-</p>
+<div class="card text-left mt-3">
+  <h5 class="card-header">
+      {{ product.productName }}
+  </h5>
+  <img class="card-img-top" src="{{ imageURL | async }}" alt="">
+  <div class="card-body">
+    <h5 class="card-title">{{ categoryName }} - {{ subcategoryName }}</h5>
+    <span>Links go here</span>
+  </div>
+  <div class="card-footer d-flex justify-content-between">
+    <p class="card-text mb-0">
+      <i class="fa fa-eur" aria-hidden="true"></i>
+      {{ product.price }}
+    </p>
+    <p class="card-text">
+      Units in stock:
+      {{ product.quantity }}
+    </p>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from 'src/app/services/menu.service';
 import { Observable } from 'rxjs';
+import { MenuItem } from 'src/app/models/MenuItem';
 
 @Component({
   selector: 'app-menu',
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  menuItems:Observable<any[]>;
+  menuItems:Observable<MenuItem[]>;
 
   constructor(private menuService:MenuService) {}
 

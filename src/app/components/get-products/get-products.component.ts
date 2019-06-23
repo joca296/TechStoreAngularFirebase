@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { Product } from 'src/app/models/Product';
 
 @Component({
   selector: 'app-get-products',
@@ -12,6 +13,7 @@ import { ProductsService } from 'src/app/services/products.service';
 export class GetProductsComponent implements OnInit {
   categories:Observable<any>;
   subcategories:Observable<any>;
+  products:Observable<Product[]>;
 
   productName:string;
   minPrice:number;
@@ -29,6 +31,7 @@ export class GetProductsComponent implements OnInit {
   ngOnInit() {
     this.categories = this.categoriesService.getCategories();
     this.subcategories = this.categoriesService.getAllSubcategories();
+    this.products = this.productsService.getProducts();
   }
 
   inStockToggle() {

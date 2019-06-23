@@ -15,12 +15,12 @@ export class ProductsService {
     private storage:AngularFireStorage
     ) { }
 
-  getProducts(){
-    return this.firestore.collection("products").valueChanges();
+  getProducts():Observable<Product[]>{
+    return this.firestore.collection<Product>("products").valueChanges();
   }
 
-  getProduct(productId:string){
-    return this.firestore.doc(`products/${productId}`).valueChanges();
+  getProduct(productId:string):Observable<Product> {
+    return this.firestore.doc<Product>(`products/${productId}`).valueChanges();
   }
 
   addProduct(newProduct:Product, files:File[]):boolean {
