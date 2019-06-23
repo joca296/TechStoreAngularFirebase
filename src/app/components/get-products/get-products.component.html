@@ -1,3 +1,82 @@
-<p>
-  get-products works!
-</p>
+<div class="row flex-xl-nowrap mr-0 ml-0">
+  <div class="col-12 col-md-3 col-xl-2 bd-sidebar bg-light">
+
+    <form class="bd-search d-flex align-items-center d-md-none">
+        <h3>Search</h3>
+        <button class="btn btn-link bd-search-docs-toggle p-0 ml-3" type="button" data-toggle="collapse" data-target="#product-search" aria-controls="product-search" aria-expanded="false" aria-label="Toggle search">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" focusable="false">
+            <title>Menu</title>
+            <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22">
+            </path>
+          </svg>
+        </button>
+    </form>
+
+    <div id="product-search" class="collapse bd-links">
+      <form style="padding: 10px;">
+
+        <div class="form-group">
+          <input type="text" name="productName" id="productName" class="form-control" placeholder="Product name" [(ngModel)]="productName">
+        </div>
+
+        <div class="form-group custom-checkbox">
+          <label>Categories</label>
+
+          <ul>
+
+            <li *ngFor="let category of categories | async">
+
+              <input class="custom-control-input" type="checkbox" value="{{ category.id }}" id="{{ category.name }}">
+              <label class="custom-control-label" for="{{ category.name }}">
+                {{ category.name }}
+              </label>
+
+              <ul>
+
+                <ng-container *ngFor="let subcategory of subcategories | async">
+                  <li *ngIf="subcategory.categoryId == category.id">
+                    <input class="custom-control-input" type="checkbox" value="{{ subcategory.id }}" id="{{ subcategory.name }}">
+                    <label class="custom-control-label" for="{{ subcategory.name }}">
+                      {{ subcategory.name }}
+                    </label>
+                  </li>
+                </ng-container>
+
+              </ul>
+
+            </li>
+
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price</label>
+
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-eur" aria-hidden="true"></i></div>
+            </div>
+            <input type="number" step="any" class="form-control" name="price" id="price" [(ngModel)]="minPrice" placeholder="Minimum price">
+          </div>
+
+          <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fa fa-eur" aria-hidden="true"></i></div>
+              </div>
+              <input type="number" step="any" class="form-control" name="price" id="price" [(ngModel)]="maxPrice" placeholder="Maximum price">
+            </div>
+        </div>
+
+        <div class="custom-control custom-checkbox">
+          <input class="custom-control-input" type="checkbox" id="stock" (click)="inStockToggle()" checked>
+          <label class="custom-control-label" for="stock">
+            In stock?
+          </label>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+</div>

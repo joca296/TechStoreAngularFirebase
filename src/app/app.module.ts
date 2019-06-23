@@ -11,19 +11,21 @@ import { AppComponent } from './app.component';
 import { Router, RouterModule } from '@angular/router';
 import { NavbarModule } from './modules/navbar/navbar.module';
 import { AppRoutingModule } from './app-routing.module';
-import { GetProductsComponent } from './components/get-products/get-products.component';
 import { CreateProductModule } from './modules/create-product/create-product.module';
+import { GetProductModule } from './modules/get-product/get-product.module';
+import { GetProductsModule } from './modules/get-products/get-products.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    GetProductsComponent,
   ],
   imports: [
     BrowserModule,
     NavbarModule,
     CreateProductModule,
+    GetProductModule,
+    GetProductsModule,
     RouterModule.forRoot([]),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

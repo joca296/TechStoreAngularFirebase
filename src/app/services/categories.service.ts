@@ -12,7 +12,11 @@ export class CategoriesService {
     return this.firestore.collection("categories").valueChanges();
   }
 
-  getSubcategories(catId:string){
+  getSubcategories(catId:string) {
     return this.firestore.collection("subcategories", ref => ref.where('categoryId', '==', catId)).valueChanges();
+  }
+
+  getAllSubcategories() {
+    return this.firestore.collection("subcategories").valueChanges();
   }
 }

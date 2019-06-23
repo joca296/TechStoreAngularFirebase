@@ -26,7 +26,7 @@ export class CreateProductComponent implements OnInit {
     public productsService:ProductsService,
     private titleService:Title
     ) {
-      titleService.setTitle("TechStore - Create Product");
+      this.titleService.setTitle("TechStore - Create Product");
     }
 
   ngOnInit() {
@@ -37,8 +37,7 @@ export class CreateProductComponent implements OnInit {
     this.files = files;
   }
 
-  onSubmit(){
-    //validate here
+  onSubmit() {
 
     let newProduct = {
       productName : this.productName,
