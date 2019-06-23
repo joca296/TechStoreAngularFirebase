@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-create-product',
@@ -22,8 +23,11 @@ export class CreateProductComponent implements OnInit {
 
   constructor(
     public categoriesService:CategoriesService,
-    public productsService:ProductsService
-    ) { }
+    public productsService:ProductsService,
+    private titleService:Title
+    ) {
+      titleService.setTitle("TechStore - Create Product");
+    }
 
   ngOnInit() {
     this.categories = this.categoriesService.getCategories();

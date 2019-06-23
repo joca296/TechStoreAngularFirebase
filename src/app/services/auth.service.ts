@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { User } from '../models/User';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -59,10 +59,27 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-  checkAdmin(user: User):boolean {
-    if (user.role.admin == null)
-      return false;
-    else
-      return user.role.admin;
+  async isAuthenticated() {
+    let result:boolean;
+    let user = this.loggedInUser.pipe(take(1)).toPromise();
+    await user.then(user => {
+      if (user == null)
+        result = false;
+      else
+        result = true;
+    });
+    return result;
+  }
+
+  async isAdmin() {
+    let result:boolean;
+    let user = this.loggedInUser.pipe(take(1)).toPromise();
+    await user.then(user => {
+      if (user == null)
+        result = false;
+      else
+        result = user.role.admin;
+    });
+    return result;
   }
 }

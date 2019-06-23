@@ -19,6 +19,13 @@
     </a>
 
     <div class="dropdown-menu">
+
+        <ng-container *ngIf="user.role.admin == true">
+          <h6 class="dropdown-header">Admin Tools</h6>
+          <a href="/createProduct" class="dropdown-item">Create product</a>
+        </ng-container>
+
+        <div class="dropdown-divider"></div>
         <a href="#" (click)="auth.signOut()" class="dropdown-item">Logout</a>
     </div>
   </div>
