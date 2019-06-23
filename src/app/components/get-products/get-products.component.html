@@ -13,7 +13,7 @@
     </form>
 
     <div id="product-search" class="collapse bd-links">
-      <form style="padding: 10px;">
+      <form style="padding: 10px;" (change)="onChanged()">
 
         <div class="form-group">
           <input type="text" name="productName" id="productName" class="form-control" placeholder="Product name" [(ngModel)]="productName">
@@ -26,7 +26,7 @@
 
             <li *ngFor="let category of categories | async">
 
-              <input class="custom-control-input" type="checkbox" value="{{ category.id }}" id="{{ category.name }}">
+              <input class="custom-control-input" type="checkbox" value="{{ category.id }}" id="{{ category.name }}" (change)="categoryToggle(category.id)">
               <label class="custom-control-label" for="{{ category.name }}">
                 {{ category.name }}
               </label>
@@ -35,7 +35,7 @@
 
                 <ng-container *ngFor="let subcategory of subcategories | async">
                   <li *ngIf="subcategory.categoryId == category.id">
-                    <input class="custom-control-input" type="checkbox" value="{{ subcategory.id }}" id="{{ subcategory.name }}">
+                    <input class="custom-control-input" type="checkbox" value="{{ subcategory.id }}" id="{{ subcategory.name }}" (change)="subcategoryToggle(subcategory.id)">
                     <label class="custom-control-label" for="{{ subcategory.name }}">
                       {{ subcategory.name }}
                     </label>
@@ -68,9 +68,9 @@
         </div>
 
         <div class="custom-control custom-checkbox">
-          <input class="custom-control-input" type="checkbox" id="stock" (click)="inStockToggle()" checked>
+          <input class="custom-control-input" type="checkbox" id="stock" (change)="inStockToggle()">
           <label class="custom-control-label" for="stock">
-            In stock?
+            Show only products in stock
           </label>
         </div>
 
@@ -80,7 +80,7 @@
   </div>
   <div class="col-12 col-md-9 col-xl-10">
       <div class="row">
-        <ng-container *ngFor="let product of products | async">
+        <ng-container *ngFor="let product of products">
             <div class="col-12 col-md-6 col-lg-4">
               <app-product-card [inputProduct]="product"></app-product-card>
             </div>

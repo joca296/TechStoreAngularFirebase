@@ -5,7 +5,15 @@
   <img class="card-img-top" src="{{ imageURL | async }}" alt="">
   <div class="card-body">
     <h5 class="card-title">{{ categoryName }} - {{ subcategoryName }}</h5>
-    <span>Links go here</span>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="/product/{{ product.id }}" class="btn btn-outline-primary">Details</a>
+      <ng-container *ngIf="auth.loggedInUser | async as user">
+        <ng-container *ngIf="user.role.admin == true">
+          <a href="/product/edit/{{ product.id }}" class="btn btn-outline-warning">Edit</a>
+          <a href="/product/delete/{{ product.id }}" class="btn btn-outline-danger">Delete</a>
+        </ng-container>
+      </ng-container>
+    </div>
   </div>
   <div class="card-footer d-flex justify-content-between">
     <p class="card-text mb-0">

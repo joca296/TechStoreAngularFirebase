@@ -3,6 +3,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Product } from 'src/app/models/Product';
 import { Observable } from 'rxjs';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-product-card',
@@ -18,7 +19,8 @@ export class ProductCardComponent implements OnInit {
 
   constructor(
     public storage:AngularFireStorage,
-    public categoriesService:CategoriesService
+    public categoriesService:CategoriesService,
+    public auth:AuthService
     ) { }
 
   ngOnInit() {
