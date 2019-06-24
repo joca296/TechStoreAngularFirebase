@@ -1,0 +1,44 @@
+<div class="container">
+  <ng-container *ngIf="product; then getProduct else notFound">
+
+  </ng-container>
+</div>
+
+<ng-template #getProduct>
+  <div class="row mt-2">
+    <div class="col-12">
+      <div class="jumbotron">
+        <h1 class="display-3">{{ product.productName }}</h1>
+        <p class="lead">{{ categoryName }} - {{ subcategoryName }}</p>
+        <hr class="my-2">
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <app-product-picture-slider [imageUrls]="imageUrls"></app-product-picture-slider>
+          </div>
+          <div class="col-12 col-lg-6">
+            <p class="lead">{{ product.description }}</p>
+            <hr class="my-2">
+            <p class="lead">
+              Price:
+              <i class="fa fa-eur" aria-hidden="true"></i>
+              {{ product.price }}
+            </p>
+            <p class="lead">
+              Units in stock:
+              {{ product.quantity }}
+            </p>
+            <hr class="my-2">
+            <form class="form-inline d-flex justify-content-between">
+              <input type="number" min="1" name="orderQuantity" id="orderQuantity" class="form-control" placeholder="Number of units" [(ngModel)]="orderQuantity">
+              <button type="submit" class="btn btn-success">Add to cart</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #notFound>
+  Not found
+</ng-template>

@@ -19,15 +19,20 @@
     </a>
 
     <div class="dropdown-menu">
+      <h6 class="dropdown-header">User profile</h6>
+      <a href="/cart" class="dropdown-item">Shopping cart</a>
+      <a href="/purchaseHistory" class="dropdown-item">Purchase history</a>
 
-        <ng-container *ngIf="user.role.admin == true">
-          <h6 class="dropdown-header">Admin Tools</h6>
-          <a href="/createProduct" class="dropdown-item">Create product</a>
-        </ng-container>
+      <div class="dropdown-divider"></div>
 
-        <div class="dropdown-divider"></div>
+      <ng-container *ngIf="user.role.admin == true">
+        <h6 class="dropdown-header">Admin Tools</h6>
+        <a href="/createProduct" class="dropdown-item">Create product</a>
+      </ng-container>
 
-        <a href="#" (click)="auth.signOut()" class="dropdown-item">Logout</a>
+      <div class="dropdown-divider"></div>
+
+      <a href="#" (click)="auth.signOut()" class="dropdown-item">Logout</a>
     </div>
   </div>
 </ng-template>
