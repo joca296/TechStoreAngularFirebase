@@ -9,7 +9,7 @@ const routes:Routes = [
   { path: 'createProduct', component: CreateProductComponent, canActivate: [AdminGuardService] },
   { path: 'product/:id', component: GetProductComponent },
   { path: '', component: GetProductsComponent },
-  { path: '**', component: GetProductsComponent }
+  { path: '**', redirectTo: "/" }
 ];
 
 @NgModule({
