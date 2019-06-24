@@ -65,7 +65,7 @@ export class GetProductsComponent implements OnInit {
     this.products = this.productsOriginal;
 
     if(this.productName != null)
-      this.products = this.products.filter(product => product.productName.includes(this.productName));
+      this.products = this.products.filter(product => product.productName.trim().toLocaleLowerCase().includes(this.productName.trim().toLocaleLowerCase()));
 
     if (this.minPrice != null)
       this.products = this.products.filter(product => product.price >= this.minPrice);
