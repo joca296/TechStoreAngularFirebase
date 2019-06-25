@@ -6,6 +6,8 @@ import { Product } from 'src/app/models/Product';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-get-product',
@@ -25,7 +27,9 @@ export class GetProductComponent implements OnInit {
     private router: Router,
     private productsService: ProductsService,
     private storage: AngularFireStorage,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private shoppingCartService: ShoppingCartService,
+    public auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -43,4 +47,12 @@ export class GetProductComponent implements OnInit {
     });
   }
 
+  onSubmit(productId:string, productQuant:number) {
+    if (this.orderQuantity <= 0 || this.orderQuantity > productQuant) {
+      alert ("Order quantity out of bounds");
+    }
+    else {
+      this.shoppingCartService.addToCart(productId, productQuant, this.orderQuantity);
+    }
+  }
 }
