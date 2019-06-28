@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CreateProductModule } from './modules/create-product/create-product.module';
 import { GetProductModule } from './modules/get-product/get-product.module';
 import { GetProductsModule } from './modules/get-products/get-products.module';
+import { ShoppingCartModule } from './modules/shopping-cart/shopping-cart.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { GetProductsModule } from './modules/get-products/get-products.module';
     CreateProductModule,
     GetProductModule,
     GetProductsModule,
+    ShoppingCartModule,
     RouterModule.forRoot([]),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

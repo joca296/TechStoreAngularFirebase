@@ -4,9 +4,12 @@ import { CreateProductComponent } from './components/create-product/create-produ
 import { GetProductsComponent } from './components/get-products/get-products.component';
 import { AdminGuardService } from './services/auth_guards/admin-guard.service';
 import { GetProductComponent } from './components/get-product/get-product.component';
+import { GetShoppingCartComponent } from './components/get-shopping-cart/get-shopping-cart.component';
+import { AuthGuardService } from './services/auth_guards/auth-guard.service';
 
 const routes:Routes = [
   { path: 'createProduct', component: CreateProductComponent, canActivate: [AdminGuardService] },
+  { path: 'cart', component: GetShoppingCartComponent, canActivate: [AuthGuardService] },
   { path: 'product/:id', component: GetProductComponent },
   { path: '', component: GetProductsComponent },
   { path: '**', redirectTo: "/" }
