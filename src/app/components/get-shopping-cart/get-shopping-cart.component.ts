@@ -3,6 +3,7 @@ import { ShoppingCartItem } from 'src/app/models/ShoppingCartItem';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductsService } from 'src/app/services/products.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
   selector: 'app-get-shopping-cart',
@@ -15,13 +16,13 @@ export class GetShoppingCartComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private firestore: AngularFirestore,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private shoppingCartService: ShoppingCartService
   ) { }
 
   ngOnInit() {
     this.auth.loggedInUser.subscribe(user => {
-      this.firestore.collection<ShoppingCartItem>(`users/${user.uid}/shoppingCart`).valueChanges().subscribe(items => {
+      this.shoppingCartService.getShoppingCart(user.uid).subscribe(items => {
         this.shoppingCartItems = items;
         items.forEach(item => {
           this.productsService.getProduct(item.productId).subscribe(product => {
@@ -32,8 +33,10 @@ export class GetShoppingCartComponent implements OnInit {
     });
   }
 
-  removeFromCart(shoppingCartItemId:string) {
-    console.log(shoppingCartItemId);
+  removeFromCart(shoppingCartItem:ShoppingCartItem) {
+    this.auth.loggedInUser.subscribe(user => {
+      this.shoppingCartService.removeShoppingCartItem(shoppingCartItem,user.uid);
+    });
   }
 
 }
