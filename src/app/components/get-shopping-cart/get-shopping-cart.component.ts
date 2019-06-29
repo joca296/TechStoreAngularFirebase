@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductsService } from 'src/app/services/products.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { ShoppingCartItemExtended } from 'src/app/models/ShoppingCartItemExtended';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-get-shopping-cart',
@@ -11,24 +13,23 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
   styleUrls: ['./get-shopping-cart.component.css']
 })
 export class GetShoppingCartComponent implements OnInit {
-  shoppingCartItems:ShoppingCartItem[] = new Array<ShoppingCartItem>();
-  productNames:string[] = new Array<string>();
+  shoppingCartItems:ShoppingCartItemExtended[] = new Array<ShoppingCartItemExtended>();
+  total:number;
 
   constructor(
     private auth: AuthService,
-    private productsService: ProductsService,
-    private shoppingCartService: ShoppingCartService
-  ) { }
+    private shoppingCartService: ShoppingCartService,
+    private titleService: Title
+  ) {
+    titleService.setTitle("TechStore - Shopping Cart")
+  }
 
   ngOnInit() {
     this.auth.loggedInUser.subscribe(user => {
       this.shoppingCartService.getShoppingCart(user.uid).subscribe(items => {
         this.shoppingCartItems = items;
-        items.forEach(item => {
-          this.productsService.getProduct(item.productId).subscribe(product => {
-            this.productNames.push(product.productName);
-          });
-        });
+        this.total = 0;
+        items.forEach(item => this.total+=item.price);
       });
     });
   }

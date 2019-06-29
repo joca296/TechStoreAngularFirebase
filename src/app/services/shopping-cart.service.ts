@@ -5,7 +5,9 @@ import { ShoppingCartItem } from '../models/ShoppingCartItem';
 import { Product } from '../models/Product';
 import { Observable } from 'rxjs';
 import { ProductsService } from './products.service';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
+import { leftJoinDocument } from '../collectionJoin';
+import { ShoppingCartItemExtended } from '../models/ShoppingCartItemExtended';
 
 @Injectable({
   providedIn: 'root'
@@ -39,8 +41,22 @@ export class ShoppingCartService {
     });
   }
 
-  getShoppingCart(uid:string):Observable<ShoppingCartItem[]> {
-    return this.firestore.collection<ShoppingCartItem>(`users/${uid}/shoppingCart`).valueChanges();
+  getShoppingCart(uid:string):Observable<ShoppingCartItemExtended[]> {
+    return this.firestore.collection<ShoppingCartItem>(`users/${uid}/shoppingCart`).valueChanges().pipe(
+      leftJoinDocument(this.firestore, 'productId', 'products'),
+      map((items:any[]) => {
+        return items.map(item => {
+          return {
+            id: item.id,
+            productId: item.productId.id,
+            quantity: item.quantity,
+            productName: item.productId.productName,
+            unitPrice: item.productId.price,
+            price: item.productId.price * item.quantity
+          }
+        })
+      })
+    );
   }
 
   removeShoppingCartItem(shoppingCartItem:ShoppingCartItem, userId:string) {

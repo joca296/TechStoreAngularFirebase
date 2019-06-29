@@ -8,6 +8,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-get-product',
@@ -29,7 +30,8 @@ export class GetProductComponent implements OnInit {
     private storage: AngularFireStorage,
     private categoriesService: CategoriesService,
     private shoppingCartService: ShoppingCartService,
-    public auth: AuthService
+    public auth: AuthService,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
@@ -39,6 +41,7 @@ export class GetProductComponent implements OnInit {
       )
     ).subscribe(prod => {
       this.product = prod;
+      this.titleService.setTitle(`TechStore - ${prod.productName}`)
       this.categoriesService.getCategory(prod.categoryId).subscribe(cat => this.categoryName = cat.name);
       this.categoriesService.getSubcategory(prod.subcategoryId).subscribe(subCat => this.subcategoryName = subCat.name);
       prod.pictureLocations.forEach(location => {
