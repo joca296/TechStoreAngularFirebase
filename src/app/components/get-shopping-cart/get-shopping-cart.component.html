@@ -10,7 +10,7 @@
 
       <h1 class="display-3">Shopping cart</h1>
       <hr class="my-2">
-      <table class="table table-hover">
+      <table class="table table-hover table-responsive-md">
         <thead class="thead-light">
           <th class="text-center">#</th>
           <th class="text-center">Product</th>
@@ -56,7 +56,7 @@
           <i class="fa fa-eur" aria-hidden="true"></i>
           {{ total }}
         </p>
-        <button class="btn btn-primary">Purchase</button>
+        <button class="btn btn-primary" (click)="purchase()">Purchase</button>
       </div>
     </div>
   </div>

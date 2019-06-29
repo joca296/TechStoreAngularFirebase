@@ -6,6 +6,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { ShoppingCartItemExtended } from 'src/app/models/ShoppingCartItemExtended';
 import { Title } from '@angular/platform-browser';
+import { PurchaseService } from 'src/app/services/purchase.service';
 
 @Component({
   selector: 'app-get-shopping-cart',
@@ -19,7 +20,8 @@ export class GetShoppingCartComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private shoppingCartService: ShoppingCartService,
-    private titleService: Title
+    private titleService: Title,
+    private purchaseService: PurchaseService
   ) {
     titleService.setTitle("TechStore - Shopping Cart")
   }
@@ -40,4 +42,7 @@ export class GetShoppingCartComponent implements OnInit {
     });
   }
 
+  purchase() {
+    this.purchaseService.createPurchase(this.shoppingCartItems, this.total);
+  }
 }

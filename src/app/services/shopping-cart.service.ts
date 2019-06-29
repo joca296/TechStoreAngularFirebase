@@ -66,4 +66,10 @@ export class ShoppingCartService {
       this.firestore.doc(`users/${userId}/shoppingCart/${shoppingCartItem.id}`).delete();
     });
   }
+
+  clearShoppingCart(shoppingCart:ShoppingCartItemExtended[], userId:string) {
+    shoppingCart.forEach(item => {
+      this.firestore.doc(`users/${userId}/shoppingCart/${item.id}`).delete();
+    });
+  }
 }
