@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-header">
+      <img src="{{ review.photoURL }}" class="rounded-circle mr-2" style="height: 40px">
+      {{ review.displayName }} -
+      {{ date.parse(review.dateCreated) }}
+  </div>
+  <div class="card-body">
+    {{ review.comment }}
+  </div>
+</div>

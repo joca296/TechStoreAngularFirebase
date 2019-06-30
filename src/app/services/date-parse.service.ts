@@ -9,6 +9,6 @@ export class DateParseService {
 
   parse(input:number):string {
     const date = new Date(input);
-    return date.toUTCString();
+    return date.toLocaleString('en-GB');
   }
 }

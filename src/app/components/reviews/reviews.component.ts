@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReviewsService } from 'src/app/services/reviews.service';
+import { ReviewExtended } from 'src/app/models/ReviewExtended';
 
 @Component({
   selector: 'app-reviews',
@@ -10,6 +11,7 @@ import { ReviewsService } from 'src/app/services/reviews.service';
 export class ReviewsComponent implements OnInit {
   @Input() inputProductId:string;
   comment:string = "";
+  reviews:ReviewExtended[] = new Array<ReviewExtended>();
 
   constructor(
     public auth: AuthService,
@@ -17,7 +19,7 @@ export class ReviewsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.reviewsService.getReviews(this.inputProductId).subscribe(reviews => this.reviews = reviews);
   }
 
   onSubmit() {
