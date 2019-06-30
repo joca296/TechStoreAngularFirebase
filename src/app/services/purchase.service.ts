@@ -18,13 +18,11 @@ export class PurchaseService {
   ) { }
 
   createPurchase(shoppingCart:ShoppingCartItemExtended[], total:number) {
-    const date = new Date();
-
     const newPurchase:PurchaseHistory = {
       id : Math.random().toString(36).replace('0.', ''),
       itemsPurchased: shoppingCart,
       total: total,
-      dateOfPurchase: date.toUTCString()
+      dateOfPurchase: Date.now(),
     }
 
     this.auth.loggedInUser.subscribe(user => {
@@ -36,6 +34,6 @@ export class PurchaseService {
   }
 
   getHistory(userId:string):Observable<PurchaseHistory[]> {
-    return this.firestore.collection<PurchaseHistory>(`users/${userId}/purchaseHistory`).valueChanges();
+    return this.firestore.collection<PurchaseHistory>(`users/${userId}/purchaseHistory`, ref => ref.orderBy('dateOfPurchase','desc')).valueChanges();
   }
 }

@@ -1,5 +1,5 @@
 export class Review {
   userId:string;
-  dateCreated:string;
+  dateCreated:number;
   comment:string;
 }

@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Title } from '@angular/platform-browser';
 import { PurchaseService } from 'src/app/services/purchase.service';
 import { PurchaseHistory } from 'src/app/models/PurchaseHistory';
+import { DateParseService } from 'src/app/services/date-parse.service';
 
 @Component({
   selector: 'app-purchase-history',
@@ -15,7 +16,8 @@ export class PurchaseHistoryComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private titleService: Title,
-    private purchaseService: PurchaseService
+    private purchaseService: PurchaseService,
+    public date: DateParseService
   ) {
     this.titleService.setTitle("Tech Store - Purchase history");
   }

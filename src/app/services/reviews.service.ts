@@ -16,7 +16,7 @@ export class ReviewsService {
     const newReview:Review = {
       userId : userId,
       comment : comment,
-      dateCreated : Date.now().toString()
+      dateCreated : Date.now()
     }
 
     const reviewRef = this.firestore.doc<Review>(`products/${productId}/reviews/${userId}`);

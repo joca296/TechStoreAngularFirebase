@@ -23,7 +23,7 @@
           <tr *ngFor="let item of purchaseHistory; let i=index">
             <td class="text-center">{{ i+1 }}</td>
             <td class="text-center">{{ item.id }}</td>
-            <td class="text-center">{{ item.dateOfPurchase }}</td>
+            <td class="text-center">{{ date.parse(item.dateOfPurchase) }}</td>
             <td class="text-center">
               <i class="fa fa-eur" aria-hidden="true"></i>
               {{ item.total }}
