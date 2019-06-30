@@ -1,0 +1,53 @@
+<div class="container">
+  <ng-container *ngIf="purchaseHistory.length != 0; then getHistory else historyEmpty">
+
+  </ng-container>
+</div>
+
+<ng-template #getHistory>
+  <div class="row mt-2">
+    <div class="col-12">
+
+      <h1 class="display-3">Purchase history</h1>
+      <hr class="my-2">
+
+      <table class="table table-hover table-responsive-md">
+        <thead class="thead-light">
+          <th class="text-center">#</th>
+          <th class="text-center">ID</th>
+          <th class="text-center">Date of purchase</th>
+          <th class="text-center">Total</th>
+          <th class="text-center">Products</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of purchaseHistory; let i=index">
+            <td class="text-center">{{ i+1 }}</td>
+            <td class="text-center">{{ item.id }}</td>
+            <td class="text-center">{{ item.dateOfPurchase }}</td>
+            <td class="text-center">
+              <i class="fa fa-eur" aria-hidden="true"></i>
+              {{ item.total }}
+            </td>
+            <td class="text-center">
+              <ul>
+                <li *ngFor="let product of item.itemsPurchased">
+                  {{ product.quantity }} x
+                  <a href="/product/{{ product.productId }}">{{ product.productName }}</a> -
+                  <i class="fa fa-eur" aria-hidden="true"></i>
+                  {{ product.price }}
+
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #historyEmpty>
+  Empty
+</ng-template>
+

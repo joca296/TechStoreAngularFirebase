@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ShoppingCartItemExtended } from '../models/ShoppingCartItemExtended';
 import { PurchaseHistory } from '../models/PurchaseHistory';
 import { ShoppingCartService } from './shopping-cart.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class PurchaseService {
       this.shoppingCartService.clearShoppingCart(shoppingCart, user.uid);
       alert("Items successfully purchased and added to history");
     });
+  }
+
+  getHistory(userId:string):Observable<PurchaseHistory[]> {
+    return this.firestore.collection<PurchaseHistory>(`users/${userId}/purchaseHistory`).valueChanges();
   }
 }
