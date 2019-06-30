@@ -1,0 +1,36 @@
+<div class="row mt-2">
+    <div class="col-12">
+      <div class="jumbotron">
+        <div class="d-flex justify-content-between">
+          <h2 class="display-5">User reviews</h2>
+          <ng-container *ngIf="auth.loggedInUser | async">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#createReview">Add review</button>
+            <!-- Modal -->
+            <div class="modal fade" id="createReview" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Add review</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <textarea class="form-control" name="comment" id="comment" rows="3" [(ngModel)]="comment" placeholder="Comment"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <hr class="my-2">
+        <div class="row">
+
+        </div>
+      </div>
+    </div>
+  </div>

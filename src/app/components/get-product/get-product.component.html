@@ -5,6 +5,7 @@
 </div>
 
 <ng-template #getProduct>
+
   <div class="row mt-2">
     <div class="col-12">
       <div class="jumbotron">
@@ -39,6 +40,9 @@
       </div>
     </div>
   </div>
+
+  <app-reviews [inputProductId]="product.id">
+  </app-reviews>
 </ng-template>
 
 <ng-template #notFound>
