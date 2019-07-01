@@ -70,4 +70,15 @@
       </form>
     </div>
   </div>
+  <hr class="my-2">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="display-5">Add product images</h2>
+      <div class="form-group">
+        <ngx-dropzone [showPreviews]="true" #dropzone (filesAdded)="onFilesAdded($event)" [accept]="'image/*'"></ngx-dropzone>
+        <button (click)="onAddPicturesSubmit()" class="btn btn-primary mt-2">Confirm</button>
+        <button (click)="dropzone.reset(); onFilesReset()" class="btn btn-warning mt-2 ml-2">Reset images</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -37,6 +37,10 @@ export class CreateProductComponent implements OnInit {
     this.files = files;
   }
 
+  onFilesReset() {
+    this.files = null;
+  }
+
   onSubmit() {
 
     let newProduct = {

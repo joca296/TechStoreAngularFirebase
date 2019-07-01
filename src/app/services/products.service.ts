@@ -5,6 +5,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { ReviewsService } from './reviews.service';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -65,5 +66,23 @@ export class ProductsService {
     productRef.update({ quantity : newQuant });
 
     alert("Quantity updated");
+  }
+
+  addProductPicture(productId:string, files:File[]) {
+    let newPictureLocations:string[] = new Array<string>();
+
+    files.forEach(file => {
+      const filePath:string = `uploads/${Date.now()}`+file.name;
+      this.storage.upload(filePath, file);
+      newPictureLocations.push(filePath);
+    });
+
+    this.getProduct(productId).pipe(take(1)).subscribe(product => {
+      newPictureLocations = newPictureLocations.concat(product.pictureLocations);
+      const productRef = this.firestore.doc<Product>(`products/${productId}`);
+      productRef.update({pictureLocations : newPictureLocations});
+      alert("Pictures have been successfully added.");
+    })
+
   }
 }

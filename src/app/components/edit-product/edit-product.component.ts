@@ -6,6 +6,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-edit-product',
@@ -23,6 +24,7 @@ export class EditProductComponent implements OnInit {
   description:string;
   price:number;
   quantity:number;
+  files:File[];
 
   quantityMod:number;
 
@@ -70,5 +72,20 @@ export class EditProductComponent implements OnInit {
       alert("Invalid quantity.");
     else
       this.productsService.updateProductQuantity(this.productId, (this.quantity + this.quantityMod));
+  }
+
+  onFilesAdded(files: File[]){
+    this.files = files;
+  }
+
+  onFilesReset() {
+    this.files = null;
+  }
+
+  onAddPicturesSubmit() {
+    if (isNullOrUndefined(this.files))
+      alert("No files have been uploaded");
+    else
+      this.productsService.addProductPicture(this.productId, this.files);
   }
 }

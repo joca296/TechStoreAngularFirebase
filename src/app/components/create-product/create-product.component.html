@@ -55,7 +55,7 @@
         <div class="form-group">
           <label for="pictures">Product images: </label>
           <ngx-dropzone [showPreviews]="true" #dropzone (filesAdded)="onFilesAdded($event)" [accept]="'image/*'"></ngx-dropzone>
-          <button (click)="dropzone.reset()" class="btn btn-warning mt-2">Reset images</button>
+          <button (click)="dropzone.reset(); onFilesReset()" class="btn btn-warning mt-2">Reset images</button>
         </div>
 
         <div class="form-group">
