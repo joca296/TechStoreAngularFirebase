@@ -17,7 +17,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class GetProductComponent implements OnInit {
   product:Product;
-  imageUrls:Observable<string>[] = new Array<Observable<string>>();
+  imageUrls:string[];
   categoryName:string;
   subcategoryName:string;
 
@@ -44,8 +44,9 @@ export class GetProductComponent implements OnInit {
       this.titleService.setTitle(`TechStore - ${prod.productName}`)
       this.categoriesService.getCategory(prod.categoryId).subscribe(cat => this.categoryName = cat.name);
       this.categoriesService.getSubcategory(prod.subcategoryId).subscribe(subCat => this.subcategoryName = subCat.name);
-      prod.pictureLocations.forEach(location => {
-        this.imageUrls.push(this.storage.ref(location).getDownloadURL());
+      this.imageUrls = new Array<string>();
+      prod.pictureLocations.forEach(picture => {
+        this.storage.ref(picture).getDownloadURL().subscribe(url => this.imageUrls.push(url));
       })
     });
   }

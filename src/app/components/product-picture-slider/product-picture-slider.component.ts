@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./product-picture-slider.component.css']
 })
 export class ProductPictureSliderComponent implements OnInit {
-  @Input() imageUrls:Observable<string>[];
+  @Input() imageUrls:string[];
 
   constructor() { }
 

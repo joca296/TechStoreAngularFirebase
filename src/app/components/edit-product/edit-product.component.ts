@@ -7,6 +7,9 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
+import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Image } from 'src/app/models/Image';
 
 @Component({
   selector: 'app-edit-product',
@@ -24,13 +27,16 @@ export class EditProductComponent implements OnInit {
   description:string;
   price:number;
   quantity:number;
-  files:File[];
+  images:Image[];
 
+  files:File[];
   quantityMod:number;
+  picturesForRemoval:string[] = new Array<string>();
 
   constructor(
     private productsService: ProductsService,
     private categoryService: CategoriesService,
+    private storage: AngularFireStorage,
     private route: ActivatedRoute
   ) { }
 
@@ -47,6 +53,15 @@ export class EditProductComponent implements OnInit {
       this.description = product.description;
       this.price = product.price;
       this.quantity = product.quantity;
+      this.images = new Array<Image>();
+      product.pictureLocations.forEach(picture => {
+        this.storage.ref(picture).getDownloadURL().subscribe(url => {
+          this.images.push({
+            location : picture,
+            url : url
+          });
+        });
+      })
       this.categoryService.getCategories().subscribe(categories => this.categories = categories);
       this.categoryService.getSubcategories(product.categoryId).subscribe(subcategories => this.subcategories = subcategories);
     })
@@ -86,6 +101,21 @@ export class EditProductComponent implements OnInit {
     if (isNullOrUndefined(this.files))
       alert("No files have been uploaded");
     else
-      this.productsService.addProductPicture(this.productId, this.files);
+      this.productsService.addProductPictures(this.productId, this.files);
+  }
+
+  onRemovePictureToggle(pictureLocation:string) {
+    let i = this.picturesForRemoval.indexOf(pictureLocation);
+    if (i == -1)
+      this.picturesForRemoval.push(pictureLocation);
+    else
+      this.picturesForRemoval.splice(i,1);
+  }
+
+  onRemovePicturesSubmit() {
+    if (this.picturesForRemoval.length == 0)
+      alert("No pictures selected");
+    else
+      this.productsService.removeProductPictures(this.productId, this.picturesForRemoval);
   }
 }

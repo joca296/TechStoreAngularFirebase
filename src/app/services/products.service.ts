@@ -68,7 +68,7 @@ export class ProductsService {
     alert("Quantity updated");
   }
 
-  addProductPicture(productId:string, files:File[]) {
+  addProductPictures(productId:string, files:File[]) {
     let newPictureLocations:string[] = new Array<string>();
 
     files.forEach(file => {
@@ -83,6 +83,21 @@ export class ProductsService {
       productRef.update({pictureLocations : newPictureLocations});
       alert("Pictures have been successfully added.");
     })
+  }
 
+  removeProductPictures(productId:string, picturesForRemoval:string[]){
+    picturesForRemoval.forEach(picture => {
+      this.storage.ref(picture).delete();
+    });
+
+    this.getProduct(productId).pipe(take(1)).subscribe(product => {
+      let newPictureLocations = product.pictureLocations;
+      picturesForRemoval.forEach(picture => {
+        newPictureLocations.splice(newPictureLocations.indexOf(picture), 1);
+      });
+      const productRef = this.firestore.doc<Product>(`products/${productId}`);
+      productRef.update({pictureLocations : newPictureLocations});
+      alert("Pictures have been successfully removed.");
+    });
   }
 }

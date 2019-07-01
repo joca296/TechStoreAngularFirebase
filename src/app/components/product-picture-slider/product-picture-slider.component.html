@@ -7,7 +7,7 @@
   <div class="carousel-inner">
     <ng-container *ngFor="let imageUrl of imageUrls; let i=index; let isFirst=first">
       <div [ngClass]="{'active': isFirst, 'carousel-item' : true}">
-        <img class="d-block w-100" src="{{ imageUrl | async }}">
+        <img class="d-block w-100" src="{{ imageUrl }}">
       </div>
     </ng-container>
   </div>
