@@ -4,6 +4,7 @@ import { Product } from 'src/app/models/Product';
 import { Observable } from 'rxjs';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-product-card',
@@ -18,9 +19,10 @@ export class ProductCardComponent implements OnInit {
   subcategoryName:string;
 
   constructor(
-    public storage:AngularFireStorage,
-    public categoriesService:CategoriesService,
-    public auth:AuthService
+    private storage:AngularFireStorage,
+    private categoriesService:CategoriesService,
+    public auth:AuthService,
+    private productsService:ProductsService
     ) { }
 
   ngOnInit() {
@@ -28,6 +30,10 @@ export class ProductCardComponent implements OnInit {
     this.imageURL = this.storage.ref(this.product.pictureLocations[0]).getDownloadURL();
     this.categoriesService.getCategory(this.product.categoryId).subscribe(cat => this.categoryName = cat.name);
     this.categoriesService.getSubcategory(this.product.subcategoryId).subscribe(subCat => this.subcategoryName = subCat.name);
+  }
+
+  deleteProduct(productId:string) {
+    this.productsService.deleteProduct(productId);
   }
 
 }

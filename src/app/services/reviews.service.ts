@@ -52,4 +52,13 @@ export class ReviewsService {
       })
     )
   }
+
+  clearReviews(productId:string) {
+    const reviewsRef = this.firestore.collection<Review>(`products/${productId}/reviews`);
+    reviewsRef.valueChanges().subscribe(reviews => {
+      reviews.forEach(review => {
+        reviewsRef.doc(review.userId).delete();
+      })
+    });
+  }
 }

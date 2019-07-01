@@ -48,9 +48,6 @@ export class CreateProductComponent implements OnInit {
       quantity : this.quantity
     }
 
-    if(this.productsService.addProduct(newProduct, this.files)) {
-      alert("Product inserted");
-      location.reload();
-    }
+    this.productsService.addProduct(newProduct, this.files);
   }
 }

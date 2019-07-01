@@ -10,7 +10,7 @@
       <ng-container *ngIf="auth.loggedInUser | async as user">
         <ng-container *ngIf="user.role.admin == true">
           <a href="/product/edit/{{ product.id }}" class="btn btn-outline-warning">Edit</a>
-          <a href="/product/delete/{{ product.id }}" class="btn btn-outline-danger">Delete</a>
+          <button class="btn btn-outline-danger" (click)="deleteProduct(product.id)">Delete</button>
         </ng-container>
       </ng-container>
     </div>
