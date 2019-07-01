@@ -7,9 +7,11 @@ import { GetProductComponent } from './components/get-product/get-product.compon
 import { GetShoppingCartComponent } from './components/get-shopping-cart/get-shopping-cart.component';
 import { AuthGuardService } from './services/auth_guards/auth-guard.service';
 import { PurchaseHistoryComponent } from './components/purchase-history/purchase-history.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 const routes:Routes = [
   { path: 'createProduct', component: CreateProductComponent, canActivate: [AdminGuardService] },
+  { path: 'product/edit/:id', component: EditProductComponent, canActivate: [AdminGuardService] },
   { path: 'cart', component: GetShoppingCartComponent, canActivate: [AuthGuardService] },
   { path: 'purchaseHistory', component: PurchaseHistoryComponent, canActivate: [AuthGuardService] },
   { path: 'product/:id', component: GetProductComponent },

@@ -16,6 +16,7 @@ import { GetProductModule } from './modules/get-product/get-product.module';
 import { GetProductsModule } from './modules/get-products/get-products.module';
 import { ShoppingCartModule } from './modules/shopping-cart/shopping-cart.module';
 import { PurchaseHistoryModule } from './modules/purchase-history/purchase-history.module';
+import { EditProductModule } from './modules/edit-product/edit-product.module';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { PurchaseHistoryModule } from './modules/purchase-history/purchase-histo
     GetProductsModule,
     ShoppingCartModule,
     PurchaseHistoryModule,
+    EditProductModule,
     RouterModule.forRoot([]),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

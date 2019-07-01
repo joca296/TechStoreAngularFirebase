@@ -52,4 +52,11 @@ export class ProductsService {
     this.reviewsService.clearReviews(productId);
     this.firestore.doc<Product>(`products/${productId}`).delete();
   }
+
+  editProduct(productId:string, newData:any) {
+    const productRef = this.firestore.doc<Product>(`products/${productId}`);
+    productRef.update(newData);
+
+    alert("Product updated");
+  }
 }
