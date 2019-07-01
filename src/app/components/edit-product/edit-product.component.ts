@@ -22,6 +22,9 @@ export class EditProductComponent implements OnInit {
   subcategoryId:string;
   description:string;
   price:number;
+  quantity:number;
+
+  quantityMod:number;
 
   constructor(
     private productsService: ProductsService,
@@ -41,6 +44,7 @@ export class EditProductComponent implements OnInit {
       this.subcategoryId = product.subcategoryId;
       this.description = product.description;
       this.price = product.price;
+      this.quantity = product.quantity;
       this.categoryService.getCategories().subscribe(categories => this.categories = categories);
       this.categoryService.getSubcategories(product.categoryId).subscribe(subcategories => this.subcategories = subcategories);
     })
@@ -59,5 +63,12 @@ export class EditProductComponent implements OnInit {
 
   onCategoryChange(categoryId:string) {
     this.categoryService.getSubcategories(categoryId).subscribe(subcategories => this.subcategories = subcategories);
+  }
+
+  onChangeQuantitySubmit() {
+    if(isNaN(this.quantityMod))
+      alert("Invalid quantity.");
+    else
+      this.productsService.updateProductQuantity(this.productId, (this.quantity + this.quantityMod));
   }
 }

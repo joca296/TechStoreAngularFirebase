@@ -59,4 +59,11 @@ export class ProductsService {
 
     alert("Product updated");
   }
+
+  updateProductQuantity(productId:string, newQuant:number) {
+    const productRef = this.firestore.doc<Product>(`products/${productId}`);
+    productRef.update({ quantity : newQuant });
+
+    alert("Quantity updated");
+  }
 }
