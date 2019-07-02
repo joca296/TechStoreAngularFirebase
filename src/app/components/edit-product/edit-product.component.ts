@@ -123,6 +123,7 @@ export class EditProductComponent implements OnInit {
 
   onCategoryChange(categoryId:string) {
     this.categoryService.getSubcategories(categoryId).subscribe(subcategories => this.subcategories = subcategories);
+    this.subcategoryId=null;
   }
 
   onChangeQuantitySubmit() {

@@ -45,6 +45,11 @@ export class CreateProductComponent implements OnInit {
     this.files = null;
   }
 
+  onCategoryChange(categoryId:string) {
+    this.subcategories = this.categoriesService.getSubcategories(categoryId);
+    this.subcategoryId=null;
+  }
+
   onSubmit() {
     this.alert.clearMessages();
 

@@ -21,7 +21,7 @@
 
         <div class="form-group">
           <label for="category">Category:</label>
-          <select name="category" id="category" class="form-control" (change)="onCategoryChange($event.target.value)" [(ngModel)]="categoryId">
+          <select name="category" id="category" class="form-control" (change)="onCategoryChange($event.target.value);" [(ngModel)]="categoryId">
             <ng-container *ngFor="let category of categories">
               <option value="{{ category.id }}" [attr.selected]="category.id == categoryId? 'selected' : null">{{ category.name }}</option>
             </ng-container>
