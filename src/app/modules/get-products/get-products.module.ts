@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GetProductsComponent } from 'src/app/components/get-products/get-products.component';
 import { FormsModule } from '@angular/forms';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { ProductCardComponent } from '../../components/product-card/product-card
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   exports: [
     GetProductsComponent
