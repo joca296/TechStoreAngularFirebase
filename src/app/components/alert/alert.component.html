@@ -1,0 +1,26 @@
+<div class="alert alert-{{ alert.type }}" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <ng-container *ngIf="alert.heading">
+    <h4 class="alert-heading">{{ alert.heading }}</h4>
+    <hr>
+  </ng-container>
+  <ng-container *ngIf="alert.messages.length > 1; then list else first">
+
+  </ng-container>
+
+
+</div>
+
+<ng-template #list>
+  <ul>
+    <li *ngFor="let message of alert.messages">
+      {{ message }}
+    </li>
+  </ul>
+</ng-template>
+
+<ng-template #first>
+  <p>{{ alert.messages[0] }}</p>
+</ng-template>
