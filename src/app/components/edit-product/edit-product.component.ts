@@ -10,6 +10,7 @@ import { isNullOrUndefined } from 'util';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Image } from 'src/app/models/Image';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -37,7 +38,8 @@ export class EditProductComponent implements OnInit {
     private productsService: ProductsService,
     private categoryService: CategoriesService,
     private storage: AngularFireStorage,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public alert: AlertService
   ) { }
 
   ngOnInit() {
@@ -68,6 +70,8 @@ export class EditProductComponent implements OnInit {
   }
 
   onSubmit() {
+    this.alert.clearMessages();
+
     const data = {
       productName: this.productName,
       categoryId: this.categoryId,
@@ -75,7 +79,46 @@ export class EditProductComponent implements OnInit {
       description: this.description,
       price: this.price
     }
-    this.productsService.editProduct(this.productId, data);
+
+    let isOk:boolean = true;
+
+    if (isNullOrUndefined(this.productName) || this.productName == "") {
+      this.alert.addMessage("Product name must not be empty.");
+      isOk = false;
+    }
+
+    if (isNullOrUndefined(this.categoryId)) {
+      this.alert.addMessage("Category must not be empty.");
+      isOk = false;
+    }
+
+    if (isNullOrUndefined(this.subcategoryId)) {
+      this.alert.addMessage("Subcategory must not be empty.");
+      isOk = false;
+    }
+
+    if (isNullOrUndefined(this.description) || this.description == "") {
+      this.alert.addMessage("Category must not be empty.");
+      isOk = false;
+    }
+
+    if (isNullOrUndefined(this.price)) {
+      this.alert.addMessage("Price must not be empty.");
+      isOk = false;
+    }
+    else
+      if (this.price <= 0) {
+      this.alert.addMessage("Invalid price format.");
+      isOk = false;
+    }
+
+    if (isOk)
+      this.productsService.editProduct(this.productId, data);
+    else {
+      this.alert.setType("danger");
+      this.alert.setHeading("Errors");
+      alert("Errors have occured.");
+    }
   }
 
   onCategoryChange(categoryId:string) {
