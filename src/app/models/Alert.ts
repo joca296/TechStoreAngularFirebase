@@ -1,5 +1,7 @@
+import { AlertType } from './AlertType';
+
 export class Alert {
-  type:string;
+  type:AlertType;
   heading:string;
   messages:string[] = new Array<string>();
 }

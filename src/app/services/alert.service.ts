@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Alert } from '../models/Alert';
 import { isNullOrUndefined } from 'util';
+import { AlertType } from '../models/AlertType';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class AlertService {
     this.obj.heading = heading;
   }
 
-  setType(type:string) {
+  setType(type:AlertType) {
     if(isNullOrUndefined(this.obj))
       this.obj = new Alert();
     this.obj.type = type;
