@@ -53,6 +53,10 @@
 </ng-template>
 
 <ng-template #historyEmpty>
-  Empty
+  <div class="row">
+    <div class="col-12">
+      <app-alert [type]="'warning'" [heading]="'Empty!'" [message]="'You haven\'t made any purchases yet.'"></app-alert>
+    </div>
+  </div>
 </ng-template>
 

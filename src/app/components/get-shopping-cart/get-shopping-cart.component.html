@@ -63,5 +63,9 @@
 </ng-template>
 
 <ng-template #shoppingCartEmpty>
-  Empty
+  <div class="row">
+    <div class="col-12">
+      <app-alert [type]="'warning'" [heading]="'Empty!'" [message]="'Shopping cart is empty.'"></app-alert>
+    </div>
+  </div>
 </ng-template>

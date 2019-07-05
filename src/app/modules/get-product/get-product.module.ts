@@ -5,11 +5,13 @@ import { ProductPictureSliderComponent } from '../../components/product-picture-
 import { FormsModule } from '@angular/forms';
 import { ReviewsComponent } from '../../components/reviews/reviews.component';
 import { ReviewComponent } from '../../components/review/review.component';
+import { AlertModule } from '../alert/alert.module';
 
 @NgModule({
   declarations: [GetProductComponent, ProductPictureSliderComponent, ReviewsComponent, ReviewComponent],
   imports: [
     CommonModule,
+    AlertModule,
     FormsModule
   ],
   exports: [

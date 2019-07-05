@@ -45,6 +45,8 @@
 
 <ng-template #noReviews>
   <div class="row mt-2">
-    no reviews found
+    <div class="col-12">
+      <app-alert [type]="'warning'" [message]="'Product does not have any reviews yet!'"></app-alert>
+    </div>
   </div>
 </ng-template>

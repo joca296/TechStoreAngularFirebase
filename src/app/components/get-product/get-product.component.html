@@ -46,5 +46,5 @@
 </ng-template>
 
 <ng-template #notFound>
-  Not found
+  <app-alert [type]="'warning'" [heading]="'Product not found'" [message]="'Product with this ID does not exist!'"></app-alert>
 </ng-template>
