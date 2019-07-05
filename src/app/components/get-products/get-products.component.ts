@@ -24,6 +24,8 @@ export class GetProductsComponent implements OnInit {
   categoryIds:string[] = new Array();
   subcategoryIds:string[] = new Array();
 
+  p:number;
+
   constructor(
     private titleService:Title,
     public categoriesService:CategoriesService,
