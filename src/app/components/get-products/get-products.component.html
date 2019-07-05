@@ -35,8 +35,8 @@
 
                 <ng-container *ngFor="let subcategory of subcategories | async">
                   <li *ngIf="subcategory.categoryId == category.id">
-                    <input class="custom-control-input" type="checkbox" value="{{ subcategory.id }}" id="{{ subcategory.name }}" (change)="subcategoryToggle(subcategory.id)">
-                    <label class="custom-control-label" for="{{ subcategory.name }}">
+                    <input class="custom-control-input" type="checkbox" value="{{ subcategory.id }}" id="{{ subcategory.id }}" (change)="subcategoryToggle(subcategory.id)">
+                    <label class="custom-control-label" for="{{ subcategory.id }}">
                       {{ subcategory.name }}
                     </label>
                   </li>
