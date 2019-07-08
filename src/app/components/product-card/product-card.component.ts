@@ -16,7 +16,6 @@ export class ProductCardComponent implements OnInit {
   product:Product;
   imageURL:Observable<string>;
   categoryName:string;
-  subcategoryName:string;
 
   constructor(
     private storage:AngularFireStorage,
@@ -29,7 +28,6 @@ export class ProductCardComponent implements OnInit {
     this.product = this.inputProduct;
     this.imageURL = this.storage.ref(this.product.pictureLocations[0]).getDownloadURL();
     this.categoriesService.getCategory(this.product.categoryId).subscribe(cat => this.categoryName = cat.name);
-    this.categoriesService.getSubcategory(this.product.subcategoryId).subscribe(subCat => this.subcategoryName = subCat.name);
   }
 
   deleteProduct(productId:string) {
