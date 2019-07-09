@@ -127,7 +127,7 @@ export class EditProductComponent implements OnInit {
   }
 
   onChangeQuantitySubmit() {
-    if(isNaN(this.quantityMod))
+    if(isNaN(this.quantityMod) || (this.quantity + this.quantityMod) < 0)
       alert("Invalid quantity.");
     else
       this.productsService.updateProductQuantity(this.productId, (this.quantity + this.quantityMod));
