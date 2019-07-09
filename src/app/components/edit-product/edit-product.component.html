@@ -1,4 +1,12 @@
 <div class="container">
+  <ng-container *ngIf="productId; then editProduct else notFound">
+
+  </ng-container>
+</div>
+
+
+<ng-template #editProduct>
+
   <div class="row mt-2">
     <div class="col-12">
       <h1 class="display-3">Edit product information</h1>
@@ -103,4 +111,9 @@
       <button (click)="onRemovePicturesSubmit()" class="btn btn-warning mt-2 mb-2">Confirm</button>
     </div>
   </div>
-</div>
+
+</ng-template>
+
+<ng-template #notFound>
+  <app-alert [type]="'warning'" [heading]="'Product not found'" [message]="'Product with this ID does not exist!'"></app-alert>
+</ng-template>
